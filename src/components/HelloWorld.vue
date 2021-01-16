@@ -2,6 +2,7 @@
   <div class="hello">
     <h1>{{ msg }}</h1>
     <h2>{{ title }}</h2>
+    <h3>{{ loginState }}</h3>
     <div>
       <a @click="message('updated state')">{{ stateVar }}</a>
     </div>
@@ -21,7 +22,8 @@ export default {
       return process.env.VUE_APP_TITLE
     },
     ...mapState({
-      stateVar: 'testState'
+      stateVar: 'testState',
+      loginState: 'loggedin'
     })
   },
   methods: {

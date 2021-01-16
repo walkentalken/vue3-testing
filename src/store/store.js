@@ -5,25 +5,22 @@ Vue.use(Vuex)
 
 export const store = new Vuex.Store({
   state: {
-    testState: 'default value goes here'
+    testState: 'default value goes here',
+    loggedin: false
   },
-  //showing things, not mutating state
   getters: {
     initState: state => {
       return state.testState
     }
   },
-  //mutating the state
-  //mutations are always synchronous
   mutations: {
-    //showing passed with payload, represented as num
     newValue: (state, newMsg) => {
       state.testState = newMsg
+      window.$cookies.set('viaLogin', true, 60 * 60 * 24 * 30) // One Month
+      state.loggedin = true
     }
   }, 
-  //commits the mutation, it's asynchronous
   actions: {
-    // showing passed with payload, represented as asynchNum (an object)
     updateVar: ({ commit }, newMsg) => {
       commit('newValue', newMsg)
     }
