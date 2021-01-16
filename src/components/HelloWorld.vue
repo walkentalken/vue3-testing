@@ -2,7 +2,7 @@
   <div class="hello">
     <h1>{{ msg }}</h1>
     <h2>{{ title }}</h2>
-    <h3>{{ loginState }}</h3>
+    <h3>Am I logged in? {{ loginState }}</h3>
     <div>
       <a @click="message('updated state')">{{ stateVar }}</a>
     </div>
@@ -22,9 +22,18 @@ export default {
       return process.env.VUE_APP_TITLE
     },
     ...mapState({
-      stateVar: 'testState',
-      loginState: 'loggedin'
-    })
+      stateVar: 'testState'
+    }),
+    loginState() {
+      const login = this.$store.state.loggedin
+      if (!login) {
+        const loginCookie = window.$cookies.isKey('viaLogin') ? window.$cookies.get('viaLogin') : false
+        this.$store.dispatch('setLoginState', loginCookie)
+        return loginCookie
+      } else {
+        return true
+      }
+    }
   },
   methods: {
     message(msg) {
