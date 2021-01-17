@@ -20,9 +20,11 @@
     </div>
 
     <div v-for="post in posts" :key="post.id" class="content">
-      <h2>{{ post.title }}</h2>
-      <p>{{ post.id }}</p>
-      <img :src="placeholderImg(post.title)">
+      <a :href="'/ticket/' + post.id">
+        <h2>{{ post.title }}</h2>
+        <p>{{ post.id }}</p>
+        <img :src="placeholderImg(post.title)">
+      </a>
     </div>
 
     <modal name="loginModal">
