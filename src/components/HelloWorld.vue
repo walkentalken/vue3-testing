@@ -22,6 +22,7 @@
     <div v-for="post in posts" :key="post.id" class="content">
       <h2>{{ post.title }}</h2>
       <p>{{ post.id }}</p>
+      <img :src="post.thumbnailUrl">
     </div>
 
     <modal name="loginModal">

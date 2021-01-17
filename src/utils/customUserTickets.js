@@ -2,7 +2,7 @@ import { store } from '@/store/store'
 
 export function customUserTickets() {
   
-  const customTicketList = fetch('https://jsonplaceholder.typicode.com/albums')
+  const customTicketList = fetch('https://jsonplaceholder.typicode.com/albums/2/photos')
     .then((response) => {
       if (!response.ok) {
         throw new Error('Network response was not ok')
