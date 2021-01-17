@@ -1,6 +1,6 @@
 <template>
   <div class="event">
-    <h1>This is an Event123 page</h1>
+    <h1>This is an Event page</h1>
     <h2>{{ eventId }}</h2>
   </div>
 </template>
