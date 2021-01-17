@@ -20,11 +20,11 @@
     </div>
 
     <div v-for="post in posts" :key="post.id" class="content">
-      <a :href="'/ticket/' + post.id">
+      <router-link :to="'/event/' + post.id">
         <h2>{{ post.title }}</h2>
         <p>{{ post.id }}</p>
         <img :src="placeholderImg(post.title)">
-      </a>
+      </router-link>
     </div>
 
     <modal name="loginModal">
@@ -57,7 +57,7 @@ import { defaultTickets } from '@/utils/defaultTickets'
 import { customUserTickets } from '@/utils/customUserTickets'
 
 export default {
-  name: 'HelloWorld',
+  name: 'Home',
   data () {
     return {
       loading: false,
