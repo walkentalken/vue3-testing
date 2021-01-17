@@ -1,25 +1,27 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import { customUserTickets } from '@/utils/customUserTickets'
+const vue = new Vue()
 
 Vue.use(Vuex)
 
 export const store = new Vuex.Store({
   state: {
-    testState: 'default value goes here',
+    currentUser: null,
     loggedin: false,
     allPosts: []
   },
   getters: {
     initState: state => {
-      return state.testState
+      return state.currentUser
     }
   },
   mutations: {
-    newValue: (state, newMsg) => {
-      state.testState = newMsg
-      window.$cookies.set('viaLogin', true, 60 * 60 * 24 * 30) // One Month
+    setCurrentUser (state, userId) {
+      state.currentUser = userId
+      window.$cookies.set('viaLogin', userId, true, 60 * 60 * 24 * 30) // One Month
       state.loggedin = true
+      vue.$modal.hide('loginModal')
     },
     newLogin: (state, loginBoolean) => {
       state.loggedin = loginBoolean
@@ -29,8 +31,8 @@ export const store = new Vuex.Store({
     }
   }, 
   actions: {
-    async updateVar ({ commit }, newMsg) {
-      commit('newValue', newMsg)
+    async loginSubmit ({ commit }, userId) {
+      commit('setCurrentUser', userId)
       const postList = await customUserTickets()
       commit('storePosts', postList)
     },

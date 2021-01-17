@@ -3,6 +3,7 @@
     <h1>{{ msg }}</h1>
     <h2>{{ title }}</h2>
     <h3>Am I logged in? {{ loginState }}</h3>
+    <h3>What is my user Id? {{ currentUserId }}</h3>
     <div>
       <a @click="message('updated state')">{{ stateVar }}</a>
     </div>
@@ -23,11 +24,26 @@
       <p>{{ post.id }}</p>
     </div>
 
-    <modal name="my-first-modal">
-        This is my first modal
-        <div>
-          <a @click="hide()">hide</a>
-        </div>
+    <modal name="loginModal">
+      <div slot="top-right">
+        <button @click="hide()">
+          x
+        </button>
+      </div>
+      <div>
+        <label for="user">Pick a User</label>
+        <select id="user" v-model="userId">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+        <button @click="login()">Log on</button>
+      </div>
+      <div>
+        <a @click="hide()">hide</a>
+      </div>
     </modal>
   </div>
 </template>
@@ -42,7 +58,8 @@ export default {
   data () {
     return {
       loading: false,
-      error: null
+      error: null,
+      userId: null
     }
   },
   props: {
@@ -70,17 +87,21 @@ export default {
     },
     posts() {
       return this.$store.state.allPosts
+    },
+    currentUserId() {
+      return this.$store.state.currentUser || 'Not logged in!'
     }
   },
   methods: {
-    message(msg) {
-      this.$store.dispatch('updateVar', msg)
+    login() {
+      const id = this.userId
+      this.$store.dispatch('loginSubmit', id)
     },
     show () {
-      this.$modal.show('my-first-modal')
+      this.$modal.show('loginModal')
     },
     hide () {
-      this.$modal.hide('my-first-modal')
+      this.$modal.hide('loginModal')
     },
     async fetchPosts () {
       this.error = null
