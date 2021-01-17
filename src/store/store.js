@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import { customUserTickets } from '@/utils/customUserTickets'
 
 Vue.use(Vuex)
 
@@ -28,8 +29,10 @@ export const store = new Vuex.Store({
     }
   }, 
   actions: {
-    updateVar: ({ commit }, newMsg) => {
+    async updateVar ({ commit }, newMsg) {
       commit('newValue', newMsg)
+      const postList = await customUserTickets()
+      commit('storePosts', postList)
     },
     setLoginState: ({ commit }, loginBoolean) => {
       commit('newLogin', loginBoolean)

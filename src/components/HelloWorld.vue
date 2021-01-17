@@ -20,7 +20,7 @@
 
     <div v-for="post in posts" :key="post.id" class="content">
       <h2>{{ post.title }}</h2>
-      <p>{{ post.body }}</p>
+      <p>{{ post.id }}</p>
     </div>
 
     <modal name="my-first-modal">
@@ -35,6 +35,7 @@
 <script>
 import { mapState } from 'vuex'
 import { defaultTickets } from '@/utils/defaultTickets'
+import { customUserTickets } from '@/utils/customUserTickets'
 
 export default {
   name: 'HelloWorld',
@@ -88,7 +89,7 @@ export default {
       // If we're logged in, get custom tickets
       if (this.$store.state.loggedin) {
         console.log('fetch custom tickets')
-        await defaultTickets()
+        await customUserTickets()
         this.loading = false
       } else { // Get the default list
         console.log('fetch default tickets')
