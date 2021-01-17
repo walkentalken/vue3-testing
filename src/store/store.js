@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import sharedMutations from 'vuex-shared-mutations'
 import { customUserTickets } from '@/utils/customUserTickets'
 import { userEndpoint } from '@/utils/userEndpoint'
 const vue = new Vue()
@@ -54,5 +55,6 @@ export const store = new Vuex.Store({
     savePosts: ({ commit }, posts) => {
       commit('storePosts', posts)
     }
-  }
+  },
+  plugins: [sharedMutations({ predicate: ['setCurrentUser', 'setCurrentUserId', 'setCurrentUserObject'] })]
 })
