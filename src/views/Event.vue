@@ -2,15 +2,18 @@
   <div class="event">
     <h1>This is an Event page</h1>
     <h2>{{ eventId }}</h2>
-    <h3>Am I logged in? {{ loginState }}</h3>
-    <h3>What is my user Id? {{ currentUserId }}</h3>
-    <h3>My Name is {{ currentUserName }}</h3>
+    <login />
   </div>
 </template>
 
 <script>
+import login from '@/components/login.vue'
+
 export default {
   name: 'Event',
+  components: {
+    login
+  },
   computed: {
     eventId() {
       return this.$route.params.id
