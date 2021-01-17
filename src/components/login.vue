@@ -35,7 +35,7 @@ export default {
   name: 'login',
   data () {
     return {
-      userId: null
+      userId: this.$store.state.currentUser
     }
   },
   computed: {

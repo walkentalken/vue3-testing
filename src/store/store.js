@@ -16,7 +16,7 @@ export const store = new Vuex.Store({
   mutations: {
     setCurrentUser (state, userId) {
       state.currentUser = userId
-      window.$cookies.set('viaLogin', userId, true, 60 * 60 * 24 * 30) // One Month
+      window.$cookies.set('viaLogin', userId, 60 * 60 * 24 * 30, '/') // One Month
       state.loggedin = true
       vue.$modal.hide('loginModal')
     },
