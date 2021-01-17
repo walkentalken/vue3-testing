@@ -80,18 +80,7 @@ export default {
       stateVar: 'testState'
     }),
     loginState() {
-      const login = this.$store.state.loggedin
-      if (!login) {
-        const loginCookieState = window.$cookies.isKey('viaLogin') ? true : false
-        const userIdValue = window.$cookies.isKey('viaLogin') ? window.$cookies.get('viaLogin') : null
-        this.$store.dispatch('setLoginState', loginCookieState)
-        if (userIdValue) {
-          this.$store.dispatch('setUserId', userIdValue)
-        }
-        return loginCookieState
-      } else {
-        return this.$store.state.loggedin
-      }
+      return this.$store.state.loggedin
     },
     posts() {
       return this.$store.state.allPosts
