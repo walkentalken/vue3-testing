@@ -1,5 +1,3 @@
-import { store } from '@/store/store'
-
 export function userEndpoint(id) {
   
   const userData = fetch('https://jsonplaceholder.typicode.com/users/'+ id)
@@ -12,7 +10,6 @@ export function userEndpoint(id) {
     })
     .then((json) => {
       // TODO - add response to global vuex object so that it's reactive on login
-      store.dispatch('setCurrentUser', json)
       return json
     })
     .catch((error) => {

@@ -85,7 +85,9 @@ export default {
         const loginCookieState = window.$cookies.isKey('viaLogin') ? true : false
         const userIdValue = window.$cookies.isKey('viaLogin') ? window.$cookies.get('viaLogin') : null
         this.$store.dispatch('setLoginState', loginCookieState)
-        this.$store.dispatch('setUserId', userIdValue)
+        if (userIdValue) {
+          this.$store.dispatch('setUserId', userIdValue)
+        }
         return loginCookieState
       } else {
         return this.$store.state.loggedin
@@ -98,7 +100,7 @@ export default {
       return this.$store.state.currentUser || 'Not logged in!'
     },
     currentUserName() {
-      return this.$store.state.currentFullUser.name || 'A man has no name!'
+      return this.$store.state.currentFullUser?.name || 'A man has no name!'
     }
   },
   methods: {

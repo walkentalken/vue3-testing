@@ -43,8 +43,10 @@ export const store = new Vuex.Store({
       const postList = await customUserTickets()
       commit('storePosts', postList)
     },
-    setUserId: ({ commit }, userId) => {
+    async setUserId ({ commit }, userId) {
       commit('setCurrentUserId', userId)
+      const currentUserObject = await userEndpoint(userId)
+      commit('setCurrentUserObject', currentUserObject)
     },
     setLoginState: ({ commit }, loginBoolean) => {
       commit('newLogin', loginBoolean)
