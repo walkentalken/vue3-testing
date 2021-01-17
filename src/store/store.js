@@ -39,7 +39,6 @@ export const store = new Vuex.Store({
       commit('newLogin', loginBoolean)
     },
     setUserId: ({ commit }, userId) => {
-      console.log(userId)
       commit('setCurrentUserId', userId)
     },
     savePosts: ({ commit }, posts) => {
