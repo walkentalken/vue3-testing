@@ -1,3 +1,5 @@
+import { store } from '@/store/store'
+
 export function defaultTickets() {
   
   const ticketList = fetch('https://jsonplaceholder.typicode.com/posts')
@@ -10,6 +12,7 @@ export function defaultTickets() {
     })
     .then((json) => {
       // TODO - add response to global vuex object so that it's reactive on login
+      store.dispatch('savePosts', json)
       return json
     })
     .catch((error) => {

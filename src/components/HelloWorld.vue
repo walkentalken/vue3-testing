@@ -41,7 +41,6 @@ export default {
   data () {
     return {
       loading: false,
-      posts: [],
       error: null
     }
   },
@@ -67,6 +66,9 @@ export default {
       } else {
         return true
       }
+    },
+    posts() {
+      return this.$store.state.allPosts
     }
   },
   methods: {
@@ -86,13 +88,11 @@ export default {
       // If we're logged in, get custom tickets
       if (this.$store.state.loggedin) {
         console.log('fetch custom tickets')
-        const customTickets = await defaultTickets()
-        this.posts = customTickets
+        await defaultTickets()
         this.loading = false
       } else { // Get the default list
         console.log('fetch default tickets')
-        const standardTickets = await defaultTickets()
-        this.posts = standardTickets
+        await defaultTickets()
         this.loading = false
       }
     }

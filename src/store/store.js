@@ -6,7 +6,8 @@ Vue.use(Vuex)
 export const store = new Vuex.Store({
   state: {
     testState: 'default value goes here',
-    loggedin: false
+    loggedin: false,
+    allPosts: []
   },
   getters: {
     initState: state => {
@@ -21,6 +22,9 @@ export const store = new Vuex.Store({
     },
     newLogin: (state, loginBoolean) => {
       state.loggedin = loginBoolean
+    },
+    storePosts: (state, posts) => {
+      state.allPosts = posts
     }
   }, 
   actions: {
@@ -29,6 +33,9 @@ export const store = new Vuex.Store({
     },
     setLoginState: ({ commit }, loginBoolean) => {
       commit('newLogin', loginBoolean)
+    },
+    savePosts: ({ commit }, posts) => {
+      commit('storePosts', posts)
     }
   }
 })
