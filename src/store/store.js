@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import { customUserTickets } from '@/utils/customUserTickets'
+import { userEndpoint } from '@/utils/userEndpoint'
 const vue = new Vue()
 
 Vue.use(Vuex)
@@ -8,6 +9,7 @@ Vue.use(Vuex)
 export const store = new Vuex.Store({
   state: {
     currentUser: null,
+    currentFullUser: null,
     loggedin: false,
     allPosts: []
   },
@@ -22,6 +24,10 @@ export const store = new Vuex.Store({
       state.currentUser = userId
       vue.$modal.hide('loginModal')
     },
+    setCurrentUserObject (state, userObject) {
+      state.currentFullUser = userObject
+      vue.$modal.hide('loginModal')
+    },
     newLogin: (state, loginBoolean) => {
       state.loggedin = loginBoolean
     },
@@ -32,14 +38,16 @@ export const store = new Vuex.Store({
   actions: {
     async loginSubmit ({ commit }, userId) {
       commit('setCurrentUser', userId)
+      const currentUserObject = await userEndpoint(userId)
+      commit('setCurrentUserObject', currentUserObject)
       const postList = await customUserTickets()
       commit('storePosts', postList)
     },
-    setLoginState: ({ commit }, loginBoolean) => {
-      commit('newLogin', loginBoolean)
-    },
     setUserId: ({ commit }, userId) => {
       commit('setCurrentUserId', userId)
+    },
+    setLoginState: ({ commit }, loginBoolean) => {
+      commit('newLogin', loginBoolean)
     },
     savePosts: ({ commit }, posts) => {
       commit('storePosts', posts)
