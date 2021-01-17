@@ -9,12 +9,13 @@ export function defaultTickets() {
       }
     })
     .then((json) => {
+      // TODO - add response to global vuex object so that it's reactive on login
       return json
     })
     .catch((error) => {
       console.error('Error:', error)
       return error
     })
-    
+
   return ticketList
 }

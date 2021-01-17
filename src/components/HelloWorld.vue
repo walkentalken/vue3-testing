@@ -6,6 +6,10 @@
     <div>
       <a @click="message('updated state')">{{ stateVar }}</a>
     </div>
+
+    <div>
+      <a @click="show()">show</a>
+    </div>
     <div v-if="loading" class="loading">
       Loading...
     </div>
@@ -18,6 +22,13 @@
       <h2>{{ post.title }}</h2>
       <p>{{ post.body }}</p>
     </div>
+
+    <modal name="my-first-modal">
+        This is my first modal
+        <div>
+          <a @click="hide()">hide</a>
+        </div>
+    </modal>
   </div>
 </template>
 
@@ -61,6 +72,12 @@ export default {
   methods: {
     message(msg) {
       this.$store.dispatch('updateVar', msg)
+    },
+    show () {
+      this.$modal.show('my-first-modal')
+    },
+    hide () {
+      this.$modal.hide('my-first-modal')
     },
     async fetchPosts () {
       this.error = null
