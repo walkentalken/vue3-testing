@@ -22,7 +22,7 @@
     <div v-for="post in posts" :key="post.id" class="content">
       <h2>{{ post.title }}</h2>
       <p>{{ post.id }}</p>
-      <img :src="post.thumbnailUrl">
+      <img :src="placeholderImg(post.title)">
     </div>
 
     <modal name="loginModal">
@@ -79,11 +79,13 @@ export default {
     loginState() {
       const login = this.$store.state.loggedin
       if (!login) {
-        const loginCookie = window.$cookies.isKey('viaLogin') ? window.$cookies.get('viaLogin') : false
-        this.$store.dispatch('setLoginState', loginCookie)
-        return loginCookie
+        const loginCookieState = window.$cookies.isKey('viaLogin') ? true : false
+        const userIdValue = window.$cookies.isKey('viaLogin') ? window.$cookies.get('viaLogin') : null
+        this.$store.dispatch('setLoginState', loginCookieState)
+        this.$store.dispatch('setUserId', userIdValue)
+        return loginCookieState
       } else {
-        return true
+        return this.$store.state.loggedin
       }
     },
     posts() {
@@ -103,6 +105,10 @@ export default {
     },
     hide () {
       this.$modal.hide('loginModal')
+    },
+    placeholderImg(title) {
+      const shortendTitle = title.slice(0, 8).replace(' ', '+')
+      return `https://via.placeholder.com/300/150/?text=`+ shortendTitle
     },
     async fetchPosts () {
       this.error = null

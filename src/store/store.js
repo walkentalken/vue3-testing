@@ -11,16 +11,15 @@ export const store = new Vuex.Store({
     loggedin: false,
     allPosts: []
   },
-  getters: {
-    initState: state => {
-      return state.currentUser
-    }
-  },
   mutations: {
     setCurrentUser (state, userId) {
       state.currentUser = userId
       window.$cookies.set('viaLogin', userId, true, 60 * 60 * 24 * 30) // One Month
       state.loggedin = true
+      vue.$modal.hide('loginModal')
+    },
+    setCurrentUserId (state, userId) {
+      state.currentUser = userId
       vue.$modal.hide('loginModal')
     },
     newLogin: (state, loginBoolean) => {
@@ -38,6 +37,10 @@ export const store = new Vuex.Store({
     },
     setLoginState: ({ commit }, loginBoolean) => {
       commit('newLogin', loginBoolean)
+    },
+    setUserId: ({ commit }, userId) => {
+      console.log(userId)
+      commit('setCurrentUserId', userId)
     },
     savePosts: ({ commit }, posts) => {
       commit('storePosts', posts)
