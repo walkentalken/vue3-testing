@@ -25,35 +25,45 @@
         </b-button>
       </b-jumbotron>
     </b-row>
-    <b-row class="mt-3">
-      <div v-if="loading" class="loading">
-        Loading...
-      </div>
+    <div v-if="loading" class="loading">
+      Loading...
+    </div>
 
-      <div v-if="error" class="error">
-        {{ error }}
-      </div>
+    <div v-if="error" class="error">
+      {{ error }}
+    </div>
 
-      <div v-for="post in posts" :key="post.id" class="content">
+    <b-card-group
+      deck 
+      v-for="(group, i) in groupedCards"
+      :key="i"
+      class="mb-5"
+      >
+      <event-card
+        v-for="post in group"
+        :key="post.id"
+        :post="post"
+        deck>
         <router-link :to="'/event/' + post.id">
-          <event :post="post" />
+          <event-card :post="post" />
         </router-link>
-      </div>
-    </b-row>
+      </event-card>
+    </b-card-group>
   </b-container>
 </template>
 
 <script>
+import { chunk } from 'lodash-es'
 import { defaultTickets } from '@/utils/defaultTickets'
 import { customUserTickets } from '@/utils/customUserTickets'
 import login from '@/components/login.vue'
-import event from '@/components/event.vue'
+import eventCard from '@/components/eventCard.vue'
 
 export default {
   name: 'Home',
   components: {
     login,
-    event
+    eventCard
   },
   data () {
     return {
@@ -76,6 +86,9 @@ export default {
     },
     loginState() {
       return this.$store.state.loggedin
+    },
+    groupedCards() {
+      return chunk(this.posts, 3)
     }
   },
   methods: {
