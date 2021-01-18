@@ -10,7 +10,7 @@
       Hi {{ currentUserName }}! <b-button variant="info" href="/user">View Cart</b-button> <b-button variant="secondary" @click="logout()">Log Out</b-button>
     </div>
 
-    <b-modal id="modal-1" title="Create an Account!">
+    <b-modal id="modal-1" title="Create an Account!" hide-footer>
       <p class="my-4">Please pick a user ID (shorthand for normal un/pw auth)</p>
       <label for="user">Pick a User</label>
       <b-form-select id="user" v-model="userId" class="mb-3">
