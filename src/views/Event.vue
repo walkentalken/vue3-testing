@@ -1,9 +1,32 @@
 <template>
-  <div class="event">
-    <h1>This is an Event page</h1>
-    <h2>{{ eventId }}</h2>
-    <login />
-  </div>
+  <b-container>
+    <b-row class="mt-3" align-h="end">
+      <login />
+    </b-row>
+    <b-row class="mt-3">
+      <b-jumbotron
+        :header="`Welcome to Event #${ eventId }`"
+        lead="Event description from API"
+        class="w-100">
+        <b-button
+          variant="danger"
+          v-b-modal.modal-1
+          v-if="!loginState">
+          Create an Account To Purchase Tickets 
+          <b-icon
+            icon="exclamation-circle-fill"
+            shift-v="2">
+          </b-icon>
+        </b-button>
+        <b-button
+          variant="info"
+          href="/user"
+          v-else>
+          Buy Tickets Now!
+        </b-button>
+      </b-jumbotron>
+    </b-row>
+  </b-container>
 </template>
 
 <script>
@@ -21,12 +44,6 @@ export default {
     loginState() {
       return this.$store.state.loggedin
     },
-    currentUserId() {
-      return this.$store.state.currentUser || 'Not logged in!'
-    },
-    currentUserName() {
-      return this.$store.state.currentFullUser?.name || 'A man has no name!'
-    }
   }
 }
 </script>
