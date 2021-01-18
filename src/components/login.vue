@@ -6,7 +6,7 @@
       Login
     </b-button>
     <div v-else>
-      Current User: {{ currentUserName }} || Current User ID: {{ currentUserId }} || <b-button @click="logout()">Log Out</b-button>
+      Hi {{ currentUserName }}! <b-button @click="logout()">Log Out</b-button>
     </div>
 
     <b-modal id="modal-1" title="BootstrapVue">
