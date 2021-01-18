@@ -60,12 +60,6 @@ export default {
       const id = this.userId
       this.$store.dispatch('loginSubmit', id)
     },
-    show () {
-      this.$modal.show('loginModal')
-    },
-    hide () {
-      this.$modal.hide('loginModal')
-    },
     placeholderImg(title) {
       const shortendTitle = title.slice(0, 8).replace(' ', '+')
       return `https://via.placeholder.com/300/150/?text=`+ shortendTitle

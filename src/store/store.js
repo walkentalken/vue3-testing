@@ -3,7 +3,6 @@ import Vuex from 'vuex'
 import sharedMutations from 'vuex-shared-mutations'
 import { customUserTickets } from '@/utils/customUserTickets'
 import { userEndpoint } from '@/utils/userEndpoint'
-const vue = new Vue()
 
 Vue.use(Vuex)
 
@@ -19,15 +18,12 @@ export const store = new Vuex.Store({
       state.currentUser = userId
       window.$cookies.set('viaLogin', userId, 60 * 60 * 24 * 30, '/') // One Month
       state.loggedin = true
-      vue.$modal.hide('loginModal')
     },
     setCurrentUserId (state, userId) {
       state.currentUser = userId
-      vue.$modal.hide('loginModal')
     },
     setCurrentUserObject (state, userObject) {
       state.currentFullUser = userObject
-      vue.$modal.hide('loginModal')
     },
     newLogin: (state, loginBoolean) => {
       state.loggedin = loginBoolean
