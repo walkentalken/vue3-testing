@@ -2,11 +2,12 @@
   <div>
     <b-button
       v-b-modal.modal-1
+      variant="danger"
       v-if="!loginState">
       Login
     </b-button>
     <div v-else>
-      Hi {{ currentUserName }}! <b-button @click="logout()">Log Out</b-button>
+      Hi {{ currentUserName }}! <b-button variant="info" href="/user">View Cart</b-button> <b-button variant="secondary" @click="logout()">Log Out</b-button>
     </div>
 
     <b-modal id="modal-1" title="BootstrapVue">

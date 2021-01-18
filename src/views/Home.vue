@@ -8,13 +8,13 @@
         :header="title"
         lead="We're the world’s largest secondary marketplace for tickets to live events. Prices are set by sellers and may be below or above face value.">
         <b-button
-          variant="primary"
+          variant="danger"
           v-b-modal.modal-1
           v-if="!loginState">
           Create an Account Now
         </b-button>
         <b-button
-          variant="primary"
+          variant="info"
           href="/user"
           v-else>
           View Your Cart
