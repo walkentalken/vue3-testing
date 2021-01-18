@@ -12,7 +12,8 @@ export const store = new Vuex.Store({
     currentUser: null,
     currentFullUser: null,
     loggedin: false,
-    allPosts: []
+    allPosts: [],
+    currentEvent: null
   },
   mutations: {
     setCurrentUser (state, userId) {
@@ -37,6 +38,9 @@ export const store = new Vuex.Store({
     },
     storePosts: (state, posts) => {
       state.allPosts = posts
+    },
+    storeEvent: (state, event) => {
+      state.currentEvent = event
     }
   }, 
   actions: {
@@ -62,6 +66,9 @@ export const store = new Vuex.Store({
     },
     savePosts: ({ commit }, posts) => {
       commit('storePosts', posts)
+    },
+    setCurrentEvent: ({ commit }, event) => {
+      commit('storeEvent', event)
     }
   },
   plugins: [sharedMutations({ predicate: ['setCurrentUser', 'logoutCurrentUser', 'setCurrentUserId', 'setCurrentUserObject'] })]

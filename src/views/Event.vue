@@ -6,7 +6,7 @@
     <b-row class="mt-3">
       <b-jumbotron
         :header="`Welcome to Event #${ eventId }`"
-        lead="Event description from API"
+        :lead="eventDescription"
         class="w-100">
         <b-button
           variant="danger"
@@ -31,11 +31,19 @@
 
 <script>
 import login from '@/components/login.vue'
+import { eventEndpoint } from '@/utils/eventEndpoint'
 
 export default {
   name: 'Event',
   components: {
     login
+  },
+  data () {
+    return {
+      error: null,
+      loading: false,
+      event: null
+    }
   },
   computed: {
     eventId() {
@@ -44,6 +52,21 @@ export default {
     loginState() {
       return this.$store.state.loggedin
     },
+    eventDescription() {
+      return this.$store.state.currentEvent?.title
+    }
+  },
+  mounted () {
+    this.fetchEvent()
+  },
+  methods: {
+    async fetchEvent () {
+      this.error = null
+      this.loading = true
+      
+      await eventEndpoint(this.eventId)
+      this.loading = false
+    }
   }
 }
 </script>
