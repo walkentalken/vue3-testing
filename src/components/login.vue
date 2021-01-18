@@ -10,16 +10,16 @@
       Hi {{ currentUserName }}! <b-button variant="info" href="/user">View Cart</b-button> <b-button variant="secondary" @click="logout()">Log Out</b-button>
     </div>
 
-    <b-modal id="modal-1" title="BootstrapVue">
-      <p class="my-4">Hello from modal!</p>
+    <b-modal id="modal-1" title="Create an Account!">
+      <p class="my-4">Please pick a user ID (shorthand for normal un/pw auth)</p>
       <label for="user">Pick a User</label>
-      <select id="user" v-model="userId">
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-      </select>
+      <b-form-select id="user" v-model="userId" class="mb-3">
+        <b-form-select-option value="1">1</b-form-select-option>
+        <b-form-select-option value="2">2</b-form-select-option>
+        <b-form-select-option value="3">3</b-form-select-option>
+        <b-form-select-option value="4">4</b-form-select-option>
+        <b-form-select-option value="5">5</b-form-select-option>
+      </b-form-select>
       <b-button @click="login()">Log on</b-button>
     </b-modal>
   </div>
