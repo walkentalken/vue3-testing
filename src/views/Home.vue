@@ -11,7 +11,11 @@
           variant="danger"
           v-b-modal.modal-1
           v-if="!loginState">
-          Create an Account Now
+          Create an Account Now 
+          <b-icon
+            icon="exclamation-circle-fill"
+            shift-v="2">
+          </b-icon>
         </b-button>
         <b-button
           variant="info"
@@ -32,9 +36,7 @@
 
       <div v-for="post in posts" :key="post.id" class="content">
         <router-link :to="'/event/' + post.id">
-          <h2>{{ post.title }}</h2>
-          <p>{{ post.id }}</p>
-          <img :src="placeholderImg(post.title)">
+          <event :post="post" />
         </router-link>
       </div>
     </b-row>
@@ -45,11 +47,13 @@
 import { defaultTickets } from '@/utils/defaultTickets'
 import { customUserTickets } from '@/utils/customUserTickets'
 import login from '@/components/login.vue'
+import event from '@/components/event.vue'
 
 export default {
   name: 'Home',
   components: {
-    login
+    login,
+    event
   },
   data () {
     return {
@@ -78,10 +82,6 @@ export default {
     login() {
       const id = this.userId
       this.$store.dispatch('loginSubmit', id)
-    },
-    placeholderImg(title) {
-      const shortendTitle = title.slice(0, 8).replace(' ', '+')
-      return `https://via.placeholder.com/300/150/?text=`+ shortendTitle
     },
     async fetchPosts () {
       this.error = null
