@@ -19,6 +19,12 @@ export const store = new Vuex.Store({
       window.$cookies.set('viaLogin', userId, 60 * 60 * 24 * 30, '/') // One Month
       state.loggedin = true
     },
+    logoutCurrentUser (state) {
+      window.$cookies.remove('viaLogin')
+      state.currentUser = null
+      state.currentFullUser = null
+      state.loggedin = false
+    },
     setCurrentUserId (state, userId) {
       state.currentUser = userId
     },
@@ -40,6 +46,9 @@ export const store = new Vuex.Store({
       const postList = await customUserTickets()
       commit('storePosts', postList)
     },
+    logoutSubmit: ({ commit }) => {
+      commit('logoutCurrentUser')
+    },
     async setUserId ({ commit }, userId) {
       commit('setCurrentUserId', userId)
       const currentUserObject = await userEndpoint(userId)
@@ -52,5 +61,5 @@ export const store = new Vuex.Store({
       commit('storePosts', posts)
     }
   },
-  plugins: [sharedMutations({ predicate: ['setCurrentUser', 'setCurrentUserId', 'setCurrentUserObject'] })]
+  plugins: [sharedMutations({ predicate: ['setCurrentUser', 'logoutCurrentUser', 'setCurrentUserId', 'setCurrentUserObject'] })]
 })

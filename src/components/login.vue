@@ -1,10 +1,13 @@
 <template>
   <div>
-    <h3>Am I logged in? {{ loginState }}</h3>
-    <h3>What is my user Id? {{ currentUserId }}</h3>
-    <h3>My Name is {{ currentUserName }}</h3>
-
-    <b-button v-b-modal.modal-1>Launch demo modal</b-button>
+    <b-button
+      v-b-modal.modal-1
+      v-if="!loginState">
+      Login
+    </b-button>
+    <div v-else>
+      Current User: {{ currentUserName }} || Current User ID: {{ currentUserId }} || <b-button @click="logout()">Log Out</b-button>
+    </div>
 
     <b-modal id="modal-1" title="BootstrapVue">
       <p class="my-4">Hello from modal!</p>
@@ -44,6 +47,11 @@ export default {
     login() {
       const id = this.userId
       this.$store.dispatch('loginSubmit', id)
+      this.$bvModal.hide('modal-1')
+    },
+    logout() {
+      const id = this.currentUserId
+      this.$store.dispatch('logoutSubmit', id)
     }
   }
 }
