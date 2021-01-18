@@ -9,7 +9,6 @@ export function userEndpoint(id) {
       }
     })
     .then((json) => {
-      // TODO - add response to global vuex object so that it's reactive on login
       return json
     })
     .catch((error) => {

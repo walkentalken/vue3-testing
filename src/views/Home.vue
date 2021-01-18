@@ -1,7 +1,21 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <h2>{{ title }}</h2>
+  <div>
+    <b-jumbotron
+      :header="title"
+      lead="We're the world’s largest secondary marketplace for tickets to live events. Prices are set by sellers and may be below or above face value.">
+      <b-button
+        variant="primary"
+        v-b-modal.modal-1
+        v-if="!loginState">
+        Create an Account Now
+      </b-button>
+      <b-button
+        variant="primary"
+        href="/user"
+        v-else>
+        View Your Cart
+      </b-button>
+    </b-jumbotron>
     <login />
     <div v-if="loading" class="loading">
       Loading...
@@ -22,7 +36,6 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
 import { defaultTickets } from '@/utils/defaultTickets'
 import { customUserTickets } from '@/utils/customUserTickets'
 import login from '@/components/login.vue'
@@ -48,11 +61,11 @@ export default {
     title() {
       return process.env.VUE_APP_TITLE
     },
-    ...mapState({
-      stateVar: 'testState'
-    }),
     posts() {
       return this.$store.state.allPosts
+    },
+    loginState() {
+      return this.$store.state.loggedin
     }
   },
   methods: {
@@ -82,21 +95,3 @@ export default {
   }
 }
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
-</style>

@@ -11,7 +11,6 @@ export function customUserTickets() {
       }
     })
     .then((json) => {
-      // TODO - add response to global vuex object so that it's reactive on login
       store.dispatch('savePosts', json)
       return json
     })
