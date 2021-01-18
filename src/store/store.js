@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import sharedMutations from 'vuex-shared-mutations'
 import { customUserTickets } from '@/utils/customUserTickets'
+import { defaultTickets } from '@/utils/defaultTickets'
 import { userEndpoint } from '@/utils/userEndpoint'
 
 Vue.use(Vuex)
@@ -46,8 +47,10 @@ export const store = new Vuex.Store({
       const postList = await customUserTickets()
       commit('storePosts', postList)
     },
-    logoutSubmit: ({ commit }) => {
+    async logoutSubmit ({ commit }) {
       commit('logoutCurrentUser')
+      const defaultTicketList = await defaultTickets()
+      commit('storePosts', defaultTicketList)
     },
     async setUserId ({ commit }, userId) {
       commit('setCurrentUserId', userId)

@@ -89,11 +89,9 @@ export default {
 
       // If we're logged in, get custom tickets
       if (this.$store.state.loggedin) {
-        console.log('fetch custom tickets')
         await customUserTickets()
         this.loading = false
       } else { // Get the default list
-        console.log('fetch default tickets')
         await defaultTickets()
         this.loading = false
       }

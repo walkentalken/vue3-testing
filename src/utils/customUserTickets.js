@@ -1,7 +1,6 @@
 import { store } from '@/store/store'
 
 export function customUserTickets() {
-  
   const customTicketList = fetch('https://jsonplaceholder.typicode.com/posts')
     .then((response) => {
       if (!response.ok) {
