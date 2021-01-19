@@ -25,6 +25,9 @@
         </b-button>
       </b-jumbotron>
     </b-row>
+    <b-row class="mt-3" align="center">
+      <search />
+    </b-row>
     <div v-if="loading" class="loading">
       Loading...
     </div>
@@ -58,12 +61,14 @@ import { defaultTickets } from '@/utils/defaultTickets'
 import { customUserTickets } from '@/utils/customUserTickets'
 import login from '@/components/login.vue'
 import eventCard from '@/components/eventCard.vue'
+import search from '@/components/search.vue'
 
 export default {
   name: 'Home',
   components: {
     login,
-    eventCard
+    eventCard,
+    search
   },
   data () {
     return {
