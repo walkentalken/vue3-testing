@@ -7,7 +7,12 @@
       Login
     </b-button>
     <div v-else>
-      Hi {{ currentUserName }}! <b-button variant="info" href="/user">View Cart ({{ cartTotal }})</b-button> <b-button variant="secondary" @click="logout()">Log Out</b-button>
+      Hi {{ currentUserName }}! <b-button variant="info" href="#" id="viewCart">View Cart ({{ cartTotal }})</b-button> <b-button variant="secondary" @click="logout()">Log Out</b-button>
+      <b-tooltip target="viewCart" triggers="hover">
+        <div v-for="(item, i) in cart" :key="i">
+          <b-button class="my-2 w-100">{{ itemDisplay(item) }} <b-icon icon="x-circle"/></b-button>
+        </div>
+      </b-tooltip>
     </div>
 
     <b-modal id="modal-1" title="Create an Account!" hide-footer>
@@ -46,6 +51,9 @@ export default {
     cartTotal() {
       const cartItems = this.$store.state.cart
       return cartItems.length
+    },
+    cart() {
+      return this.$store.state.cart
     }
   },
   methods: {
@@ -57,6 +65,9 @@ export default {
     logout() {
       const id = this.currentUserId
       this.$store.dispatch('logoutSubmit', id)
+    },
+    itemDisplay(item) {
+      return item.title.slice(0, 8)
     }
   }
 }
