@@ -7,7 +7,7 @@
       Login
     </b-button>
     <div v-else>
-      Hi {{ currentUserName }}! <b-button variant="info" href="/user">View Cart</b-button> <b-button variant="secondary" @click="logout()">Log Out</b-button>
+      Hi {{ currentUserName }}! <b-button variant="info" href="/user">View Cart ({{ cartTotal }})</b-button> <b-button variant="secondary" @click="logout()">Log Out</b-button>
     </div>
 
     <b-modal id="modal-1" title="Create an Account!" hide-footer>
@@ -42,6 +42,10 @@ export default {
     },
     currentUserName() {
       return this.$store.state.currentFullUser?.name || 'A man has no name!'
+    },
+    cartTotal() {
+      const cartItems = this.$store.state.cart
+      return cartItems.length
     }
   },
   methods: {

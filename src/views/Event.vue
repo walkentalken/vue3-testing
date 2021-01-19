@@ -19,10 +19,16 @@
           </b-icon>
         </b-button>
         <b-button
+          disabled
           variant="info"
-          @click="addToCart(eventId)"
+          v-else-if="alreadyAdded">
+          Added!
+        </b-button>
+        <b-button
+          variant="info"
+          @click="addToCart()"
           v-else>
-          {{ ticketButton }}
+          Add to Cart!
         </b-button>
       </b-jumbotron>
     </b-row>
@@ -30,6 +36,7 @@
 </template>
 
 <script>
+import { find } from 'lodash-es'
 import login from '@/components/login.vue'
 import { eventEndpoint } from '@/utils/eventEndpoint'
 
@@ -56,8 +63,10 @@ export default {
     eventDescription() {
       return this.$store.state.currentEvent?.title
     },
-    ticketButton() {
-      return this.eventInCart ? 'Added!' : 'Buy Tickets Now!'
+    alreadyAdded() {
+      const cart = this.$store.state.cart
+      const currentItem = this.$store.state.currentEvent
+      return find(cart, currentItem)
     }
   },
   mounted () {
@@ -71,10 +80,8 @@ export default {
       await eventEndpoint(this.eventId)
       this.loading = false
     },
-    addToCart(eventId) {
-      console.log('eventId')
-      console.log(eventId)
-      this.eventInCart = true
+    addToCart() {
+      this.$store.dispatch('addItemToCart', this.$store.state.currentEvent)
     }
   }
 }

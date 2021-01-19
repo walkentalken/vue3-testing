@@ -13,7 +13,8 @@ export const store = new Vuex.Store({
     currentFullUser: null,
     loggedin: false,
     allPosts: [],
-    currentEvent: null
+    currentEvent: null,
+    cart: []
   },
   mutations: {
     setCurrentUser (state, userId) {
@@ -41,6 +42,9 @@ export const store = new Vuex.Store({
     },
     storeEvent: (state, event) => {
       state.currentEvent = event
+    },
+    addToCart: (state, eventObject) => {
+      state.cart.push(eventObject)
     }
   }, 
   actions: {
@@ -69,6 +73,9 @@ export const store = new Vuex.Store({
     },
     setCurrentEvent: ({ commit }, event) => {
       commit('storeEvent', event)
+    },
+    addItemToCart: ({ commit }, eventObject) => {
+      commit('addToCart', eventObject)
     }
   },
   plugins: [sharedMutations({ predicate: ['setCurrentUser', 'logoutCurrentUser', 'setCurrentUserId', 'setCurrentUserObject'] })]
