@@ -79,5 +79,5 @@ export const store = new Vuex.Store({
       commit('addToCart', eventObject)
     }
   },
-  plugins: [sharedMutations({ predicate: ['setCurrentUser', 'logoutCurrentUser', 'setCurrentUserId', 'setCurrentUserObject', 'addItemToCart'] })]
+  plugins: [sharedMutations({ predicate: ['setCurrentUser', 'logoutCurrentUser', 'setCurrentUserId', 'setCurrentUserObject', 'addToCart'] })]
 })
