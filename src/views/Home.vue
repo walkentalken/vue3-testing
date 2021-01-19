@@ -21,7 +21,7 @@
           variant="info"
           href="/user"
           v-else>
-          View Your Cart
+          View Your Cart ({{ cartTotal }})
         </b-button>
       </b-jumbotron>
     </b-row>
@@ -96,6 +96,10 @@ export default {
     },
     groupedCards() {
       return chunk(this.posts, 3)
+    },
+    cartTotal() {
+      const cartItems = this.$store.state.cart
+      return cartItems.length
     }
   },
   methods: {
