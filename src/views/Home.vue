@@ -25,9 +25,11 @@
         </b-button>
       </b-jumbotron>
     </b-row>
+
     <b-row class="mt-3" align="center">
       <search />
     </b-row>
+
     <div v-if="loading" class="loading">
       Loading...
     </div>
@@ -40,7 +42,7 @@
       deck 
       v-for="(group, i) in groupedCards"
       :key="i"
-      class="mb-5"
+      class="mb-5 mt-5"
       >
       <event-card
         v-for="post in group"

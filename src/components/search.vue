@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <div class="w-100">
     <b-form-input
       list="my-list-id"
-      debounce="10000"
+      placeholder="Search for an Event"
       v-model="text"
       @keyup="searchTrigger" />
 
