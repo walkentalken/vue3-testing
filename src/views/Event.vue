@@ -20,9 +20,9 @@
         </b-button>
         <b-button
           variant="info"
-          href="/user"
+          @click="addToCart(eventId)"
           v-else>
-          Buy Tickets Now!
+          {{ ticketButton }}
         </b-button>
       </b-jumbotron>
     </b-row>
@@ -42,7 +42,8 @@ export default {
     return {
       error: null,
       loading: false,
-      event: null
+      event: null,
+      eventInCart: false
     }
   },
   computed: {
@@ -54,6 +55,9 @@ export default {
     },
     eventDescription() {
       return this.$store.state.currentEvent?.title
+    },
+    ticketButton() {
+      return this.eventInCart ? 'Added!' : 'Buy Tickets Now!'
     }
   },
   mounted () {
@@ -66,6 +70,11 @@ export default {
       
       await eventEndpoint(this.eventId)
       this.loading = false
+    },
+    addToCart(eventId) {
+      console.log('eventId')
+      console.log(eventId)
+      this.eventInCart = true
     }
   }
 }
