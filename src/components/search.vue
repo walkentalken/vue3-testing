@@ -2,9 +2,9 @@
   <div>
     <b-form-input
       list="my-list-id"
-      debounce="500"
+      debounce="10000"
       v-model="text"
-      @change="searchTrigger" />
+      @keyup="searchTrigger" />
 
     <datalist id="my-list-id">
       <option v-for="(event, i) in events" :key="i">{{ event.name }}</option>
@@ -19,7 +19,12 @@ export default {
   data() {
     return {
       text: '',
-      events: []
+      events: [{
+        "id":"0",
+        "createdAt":"2021-01-19T10:09:32.193Z",
+        "name":"Enter a Name!",
+        "avatar":"https://s3.amazonaws.com/uifaces/faces/twitter/catadeleon/128.jpg"
+      }]
     }
   },
   methods: {
