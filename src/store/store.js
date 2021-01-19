@@ -27,6 +27,7 @@ export const store = new Vuex.Store({
       state.currentUser = null
       state.currentFullUser = null
       state.loggedin = false
+      state.cart = []
     },
     setCurrentUserId (state, userId) {
       state.currentUser = userId
